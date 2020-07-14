@@ -16,11 +16,11 @@ export class DomesticCustomer extends Customer {
     this._quota = quota;
   }
 
-  public get customer(): string {
+  public get customers(): string {
     return this._customers;
   }
 
-  public set customer(v: string) {
+  public set customers(v: string) {
     this._customers = v;
   }
 

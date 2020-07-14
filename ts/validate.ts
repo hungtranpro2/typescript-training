@@ -1,10 +1,15 @@
-const id = document.getElementById("id");
-const user = document.getElementById("name");
-const price = document.getElementById("price");
-const amount = document.getElementById("amount");
-const customers = document.getElementById("customers");
-const quota = document.getElementById("quota");
-const nationality = document.getElementById("nationality");
+import { CustomersList } from './CustomersList';
+import { list } from './main';
+
+export const id = document.getElementById("id");
+export const user = document.getElementById("name");
+export const price = document.getElementById("price");
+export const amount = document.getElementById("amount");
+export const customers = document.getElementById("customers");
+export const quota = document.getElementById("quota");
+export const nationality = document.getElementById("nationality");
+export const customerType = document.getElementById("customer-select");
+let check: boolean;
 
 export function checkInputs() {
   const idValue = (<HTMLInputElement>id).value.trim();
@@ -14,14 +19,33 @@ export function checkInputs() {
   const customersValue = (<HTMLInputElement>customers).value.trim();
   const quotaValue = (<HTMLInputElement>quota).value.trim();
   const nationalityValue = (<HTMLInputElement>nationality).value.trim();
+  check = true;
 
   checkEmpty(id, idValue);
+  checkNegative(id,idValue);
+  for (const x of list.customersList) {
+    if (parseInt(idValue) === x.id) {
+      setErrorFor(id,"Id already exist");
+      check = false;
+    }
+  }
   checkEmpty(user, userValue);
   checkEmpty(price, priceValue);
+  checkNegative(price,priceValue)
   checkEmpty(amount, amountValue);
-  checkEmpty(customers, customersValue);
-  checkEmpty(quota, quotaValue);
-  checkEmpty(nationality, nationalityValue);
+  checkNegative(amount,amountValue)
+
+  if ((<HTMLSelectElement>customerType).selectedIndex == 0) {
+    checkEmpty(customers, customersValue);
+    checkEmpty(quota, quotaValue);
+    checkNegative(quota,quotaValue);
+  }
+  if ((<HTMLSelectElement>customerType).selectedIndex == 1) {
+    checkEmpty(nationality, nationalityValue);
+  }
+
+
+  return check;
 }
 
 function setErrorFor(input, message) {
@@ -43,7 +67,15 @@ function setSuccessFor(input) {
 function checkEmpty(input, value) {
   if (value == "") {
     setErrorFor(input, `${input.name} cannot be blank`);
+    check = false;
   } else {
     setSuccessFor(input);
+  }
+}
+
+function checkNegative(input,value){
+  if (parseInt(value)<0) {
+    setErrorFor(input,`${input.name} must be a positive number`);
+    check = false
   }
 }
