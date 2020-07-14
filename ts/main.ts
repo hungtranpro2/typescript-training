@@ -27,7 +27,7 @@ for (const x in type) {
 // Array
 const bills = [
   {
-    idCustomer: "01",
+    id: "01",
     name: "ABC",
     price: "1500",
     amount: "5",
@@ -35,7 +35,7 @@ const bills = [
     quota: "50",
   },
   {
-    idCustomer: "02",
+    id: "02",
     name: "XYZ",
     price: "1500",
     amount: "5",
@@ -65,7 +65,7 @@ function load() {
   for (const bill of bills) {
     tBody.innerHTML += `
     <tr>
-      <td>${bill.idCustomer}</td>
+      <td>${bill.id}</td>
       <td>${bill.name}</td>
       <td>${bill.price}</td>
       <td>${bill.amount}</td>
