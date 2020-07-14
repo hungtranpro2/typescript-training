@@ -1,18 +1,16 @@
-let modal = document.getElementById('myModal');
-let btn = document.getElementById('btn-add');
-let span = document.getElementsByClassName("close")[0];
+let modal = document.getElementById("myModal");
 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-
-window.onclick = function(event) {
-  if (event.target == modal) {
+// Modal box
+export const eventDialog = {
+  showModal: () => {
+    modal.style.display = "block";
+  },
+  hideModal: () => {
+    modal.style.display = "none";
+  },
+  hideModal2: () => {
+    if (event.target == modal) {
       modal.style.display = "none";
-  }
-}
+    }
+  },
+};

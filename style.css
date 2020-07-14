@@ -44,7 +44,7 @@ label {
 
 .form-group small {
   float: right;
-  visibility: visible;
+  visibility: hidden;
   color: #e74c3c;
 }
 
@@ -126,6 +126,6 @@ form {
   cursor: pointer;
 }
 
-.foreign {
+#foreign {
   display: none;
 }
