@@ -1,5 +1,5 @@
-import { CustomersList } from './CustomersList';
-import { list } from './main';
+import { CustomersList } from "./CustomersList";
+import { list } from "./main";
 
 export const id = document.getElementById("id");
 export const user = document.getElementById("name");
@@ -21,22 +21,20 @@ export function checkInputs() {
   const nationalityValue = (<HTMLInputElement>nationality).value.trim();
   check = true;
 
-
   checkEmpty(user, userValue);
   checkEmpty(price, priceValue);
-  checkNegative(price,priceValue)
+  checkNegative(price, priceValue);
   checkEmpty(amount, amountValue);
-  checkNegative(amount,amountValue)
+  checkNegative(amount, amountValue);
 
   if ((<HTMLSelectElement>customerType).selectedIndex == 0) {
     checkEmpty(customers, customersValue);
     checkEmpty(quota, quotaValue);
-    checkNegative(quota,quotaValue);
+    checkNegative(quota, quotaValue);
   }
   if ((<HTMLSelectElement>customerType).selectedIndex == 1) {
     checkEmpty(nationality, nationalityValue);
   }
-
 
   return check;
 }
@@ -66,9 +64,9 @@ function checkEmpty(input, value) {
   }
 }
 
-function checkNegative(input,value){
-  if (parseInt(value)<0) {
-    setErrorFor(input,`${input.name} must be a positive number`);
-    check = false
+function checkNegative(input, value) {
+  if (parseInt(value) < 0) {
+    setErrorFor(input, `${input.name} must be a positive number`);
+    check = false;
   }
 }

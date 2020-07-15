@@ -13,7 +13,8 @@ import {
 import { CustomersList } from "./CustomersList";
 import { DomesticCustomer } from "./DomesticCustomer";
 import { ForeignCustomer } from "./ForeignCustomer";
-import { DisplayList, SetupPagination,current_page,rows } from './pagination';
+import { DisplayList, SetupPagination, current_page, rows } from "./pagination";
+import { snackBar } from './snackbar';
 
 // Variable
 const btnShow = document.getElementById("btn-add");
@@ -55,11 +56,12 @@ function addCustomer() {
       quotaValue
     );
     list.addCustomer(domesticCustomer);
+    snackBar("Add Success");
     (<HTMLFormElement>form).reset();
     (<HTMLInputElement>document.getElementById("id")).value = (
       list.customersList.length + 1
     ).toString();
-    (<HTMLSelectElement>customerType).selectedIndex = 0
+    (<HTMLSelectElement>customerType).selectedIndex = 0;
   }
   if ((<HTMLSelectElement>customerType).selectedIndex == 1 && checkInputs()) {
     let foreignCustomer = new ForeignCustomer(
@@ -70,14 +72,15 @@ function addCustomer() {
       nationalityValue
     );
     list.addCustomer(foreignCustomer);
+    snackBar("Add Success");
     (<HTMLFormElement>form).reset();
     (<HTMLInputElement>document.getElementById("id")).value = (
       list.customersList.length + 1
     ).toString();
-    (<HTMLSelectElement>customerType).selectedIndex = 1
+    (<HTMLSelectElement>customerType).selectedIndex = 1;
   }
   DisplayList(list.customersList, tBody, rows, current_page);
-  SetupPagination(list.customersList,pagination_element,rows)
+  SetupPagination(list.customersList, pagination_element, rows);
 }
 
 // Enum customerType
@@ -106,7 +109,7 @@ function selectCustomer() {
 
 // Add data to Table
 export function loadData(items) {
-  let index: number = 0
+  let index: number = 0;
   tBody.innerHTML = "";
   for (let customer of items) {
     if (customer instanceof DomesticCustomer) {
@@ -122,12 +125,8 @@ export function loadData(items) {
         <td></td>
         <td>${customer.cash()}</td>
         <td class = btn-group>
-        <button type="button" class="btn btn--edit" data-id="${
-          index
-        }">Edit</button>
-        <button type="button" class="btn btn--delete" data-id="${
-          index
-        }">Delete</button>
+        <button type="button" class="btn btn--edit" data-id="${index}">Edit</button>
+        <button type="button" class="btn btn--delete" data-id="${index}">Delete</button>
         </td>
       </tr>
       `;
@@ -144,12 +143,8 @@ export function loadData(items) {
         <td>${customer.nationality}</td>
         <td>${customer.cash()}</td>
         <td class = btn-group>
-        <button type="button" class="btn btn--edit" data-id="${
-          index
-        }">Edit</button>
-        <button type="button" class="btn btn--delete" data-id="${
-          index
-        }">Delete</button>
+        <button type="button" class="btn btn--edit" data-id="${index}">Edit</button>
+        <button type="button" class="btn btn--delete" data-id="${index}">Delete</button>
         </td>
       </tr>
       `;
@@ -160,10 +155,13 @@ export function loadData(items) {
 
 // Delete Customer
 const deleteCustomer = (e) => {
-  const customerIndex = e.target.dataset.id ;
-  list.customersList.splice(customerIndex - 1 , 1);
-  DisplayList(list.customersList, tBody, rows, current_page);
-  SetupPagination(list.customersList,pagination_element,rows)
+  const customerIndex = e.target.dataset.id;
+  if (confirm("Are you sure?")) {
+    list.customersList.splice(customerIndex - 1, 1);
+    snackBar("Delete Success")
+    DisplayList(list.customersList, tBody, rows, current_page);
+    SetupPagination(list.customersList, pagination_element, rows);
+  }
 };
 
 let data: number;
@@ -231,6 +229,7 @@ const editCustomer = (e) => {
       quotaValue
     );
     list.editCustomer(data, domesticCustomer);
+    snackBar("Update Success");
     (<HTMLFormElement>form).reset();
   }
   if ((<HTMLSelectElement>customerType).selectedIndex == 1 && checkInputs()) {
@@ -242,10 +241,11 @@ const editCustomer = (e) => {
       nationalityValue
     );
     list.editCustomer(data, foreignCustomer);
+    snackBar("Update Success");
     (<HTMLFormElement>form).reset();
   }
   DisplayList(list.customersList, tBody, rows, current_page);
-  SetupPagination(list.customersList,pagination_element,rows)
+  SetupPagination(list.customersList, pagination_element, rows);
 };
 
 // Event delete and edit
