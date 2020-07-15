@@ -1,99 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Electricity Bills</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manage Electricity Bills</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <h1>Manage Electricity Bills</h1>
-  <div class="container">
-    <button type="button" class="btn btn--add" id="btn-add">
-      Add Bill
-    </button>
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <form id="form">
-          <div class="form-group">
-            <div class="column">
-              <label>Customer Type</label>
-              <select class="form-control" id="customer-select">
-              </select>
+  <body>
+    <h1>Manage Electricity Bills</h1>
+    <div class="container">
+      <!-- Button Add Customer -->
+      <button type="button" class="btn btn--add" id="btn-add">
+        Add Bill
+      </button>
+      <!-- Modal box -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form id="form">
+            <div class="form-group">
+              <div class="column">
+                <label>Customer Type</label>
+                <select class="form-control" id="customer-select"> </select>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <div class="column">
-              <label for="id">ID</label>
-              <small>Error message</small>
-              <input type="number" class="form-control" id="id" placeholder="ID" name="id" readonly/>
+            <div class="form-group">
+              <div class="column">
+                <label for="id">ID</label>
+                <small>Error message</small>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="id"
+                  placeholder="ID"
+                  name="id"
+                  readonly
+                />
+              </div>
+              <div class="column">
+                <label for="name">Name</label>
+                <small>Error message</small>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="Name"
+                  name="name"
+                />
+              </div>
             </div>
-            <div class="column">
-              <label for="name">Name</label>
-              <small>Error message</small>
-              <input type="text" class="form-control" id="name" placeholder="Name" name="name" />
+            <div class="form-group">
+              <div class="column">
+                <label for="price">Price</label>
+                <small>Error message</small>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  placeholder="Price"
+                  name="price"
+                />
+              </div>
+              <div class="column">
+                <label for="amount">Amount</label>
+                <small>Error message</small>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="amount"
+                  placeholder="Amount"
+                  name="amount"
+                />
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <div class="column">
-              <label for="price">Price</label>
-              <small>Error message</small>
-              <input type="number" class="form-control" id="price" placeholder="Price" name="price" />
+            <div class="form-group" id="domestic">
+              <div class="column">
+                <label for="customers">Customers</label>
+                <small>Error message</small>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="customers"
+                  placeholder="Customers"
+                  name="customers"
+                />
+              </div>
+              <div class="column">
+                <label for="Quota">Quota</label>
+                <small>Error message</small>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quota"
+                  placeholder="Quota"
+                  name="quota"
+                />
+              </div>
             </div>
-            <div class="column">
-              <label for="amount">Amount</label>
-              <small>Error message</small>
-              <input type="number" class="form-control" id="amount" placeholder="Amount" name="amount" />
+            <div class="form-group" id="foreign">
+              <div class="column">
+                <label for="nationality">Nationality</label>
+                <small>Error message</small>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nationality"
+                  placeholder="Nationality"
+                  name="nationality"
+                />
+              </div>
             </div>
-          </div>
-          <div class="form-group" id="domestic">
-            <div class="column">
-              <label for="customers">Customers</label>
-              <small>Error message</small>
-              <input type="text" class="form-control" id="customers" placeholder="Customers" name="customers" />
-            </div>
-            <div class="column">
-              <label for="Quota">Quota</label>
-              <small>Error message</small>
-              <input type="number" class="form-control" id="quota" placeholder="Quota" name="quota" />
-            </div>
-          </div>
-          <div class="form-group" id="foreign">
-            <div class="column">
-              <label for="nationality">Nationality</label>
-              <small>Error message</small>
-              <input type="text" class="form-control" id="nationality" placeholder="Nationality" name="nationality" />
-            </div>
-          </div>
-          <button type="button" class="btn btn--add" id="btn-submit">
-            Add
-          </button>
-          <button type="button" class="btn btn--add" id="btn-update">
-            Update
-          </button>
-        </form>
+            <!-- Button add -->
+            <button type="button" class="btn btn--add" id="btn-submit">
+              Add
+            </button>
+            <!-- Button update -->
+            <button type="button" class="btn btn--add" id="btn-update">
+              Update
+            </button>
+          </form>
+        </div>
       </div>
+      <h2>Bills List</h2>
+      <!-- Data table -->
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>amount</th>
+          <th>Customers</th>
+          <th>Quota</th>
+          <th>Nationality</th>
+          <th>total</th>
+          <th></th>
+        </tr>
+        <tbody id="tBodyBills"></tbody>
+      </table>
+      <!-- Pagination -->
+      <div class="page-numbers" id="pagination"></div>
     </div>
-    <h2>Bills List</h2>
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>amount</th>
-        <th>Customers</th>
-        <th>Quota</th>
-        <th>Nationality</th>
-        <th>total</th>
-        <th></th>
-      </tr>
-      <tbody id="tBodyBills"></tbody>
-    </table>
-  </div>
-  <script src="ts/main.ts"></script>
-</body>
-
+    <script src="ts/main.ts"></script>
+  </body>
 </html>
