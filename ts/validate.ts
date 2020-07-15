@@ -21,14 +21,7 @@ export function checkInputs() {
   const nationalityValue = (<HTMLInputElement>nationality).value.trim();
   check = true;
 
-  checkEmpty(id, idValue);
-  checkNegative(id,idValue);
-  for (const x of list.customersList) {
-    if (parseInt(idValue) === x.id) {
-      setErrorFor(id,"Id already exist");
-      check = false;
-    }
-  }
+
   checkEmpty(user, userValue);
   checkEmpty(price, priceValue);
   checkNegative(price,priceValue)

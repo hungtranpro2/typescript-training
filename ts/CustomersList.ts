@@ -7,4 +7,8 @@ export class CustomersList {
   addCustomer(customer: Customer) {
     this.customersList.push(customer)
   }
+
+  editCustomer(index,customer: Customer) {
+    this.customersList[index] = customer
+  }
 }

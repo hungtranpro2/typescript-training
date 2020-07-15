@@ -75,6 +75,9 @@ label {
   background-color: #d9534f;
   border: 2px solid #d9534f;
 }
+#btn-update{
+  display: none;
+}
 
 .btn-group {
   display: flex;
