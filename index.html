@@ -19,19 +19,19 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <form id="form">
-            <div class="form-group">
+            <div class="form__group">
               <div class="column">
                 <label>Customer Type</label>
-                <select class="form-control" id="customer-select"> </select>
+                <select class="form__control" id="customer-select"> </select>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form__group">
               <div class="column">
                 <label for="id">ID</label>
                 <small>Error message</small>
                 <input
                   type="number"
-                  class="form-control"
+                  class="form__control"
                   id="id"
                   placeholder="ID"
                   name="id"
@@ -43,20 +43,20 @@
                 <small>Error message</small>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form__control"
                   id="name"
                   placeholder="Name"
                   name="name"
                 />
               </div>
             </div>
-            <div class="form-group">
+            <div class="form__group">
               <div class="column">
                 <label for="price">Price</label>
                 <small>Error message</small>
                 <input
                   type="number"
-                  class="form-control"
+                  class="form__control"
                   id="price"
                   placeholder="Price"
                   name="price"
@@ -67,20 +67,20 @@
                 <small>Error message</small>
                 <input
                   type="number"
-                  class="form-control"
+                  class="form__control"
                   id="amount"
                   placeholder="Amount"
                   name="amount"
                 />
               </div>
             </div>
-            <div class="form-group" id="domestic">
+            <div class="form__group" id="domestic">
               <div class="column">
                 <label for="customers">Customers</label>
                 <small>Error message</small>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form__control"
                   id="customers"
                   placeholder="Customers"
                   name="customers"
@@ -91,20 +91,20 @@
                 <small>Error message</small>
                 <input
                   type="number"
-                  class="form-control"
+                  class="form__control"
                   id="quota"
                   placeholder="Quota"
                   name="quota"
                 />
               </div>
             </div>
-            <div class="form-group" id="foreign">
+            <div class="form__group" id="foreign">
               <div class="column">
                 <label for="nationality">Nationality</label>
                 <small>Error message</small>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form__control"
                   id="nationality"
                   placeholder="Nationality"
                   name="nationality"
@@ -127,6 +127,7 @@
       <table class="table">
         <tr>
           <th>ID</th>
+          <th>CustomerType</th>
           <th>Name</th>
           <th>Price</th>
           <th>amount</th>

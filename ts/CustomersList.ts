@@ -1,6 +1,6 @@
-import { Customer } from "./Customer";
+import { Customer } from './Customer';
 export class CustomersList {
-  customersList: Array<Customer> = new Array<Customer>();
+  customersList: Customer[] =[];
 
   constructor() {}
 
@@ -8,7 +8,7 @@ export class CustomersList {
     this.customersList.push(customer);
   }
 
-  editCustomer(index, customer: Customer) {
+  editCustomer(index: number, customer: Customer) {
     this.customersList[index] = customer;
   }
 }

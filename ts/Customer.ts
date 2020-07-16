@@ -1,5 +1,4 @@
-import { Electricity } from './Electricity';
-export abstract class Customer implements Electricity{
+export abstract class Customer {
   private _id: number;
   private _name: string;
   private _price: number;

@@ -1,24 +1,30 @@
+// Import file
 import { CustomersList } from "./CustomersList";
-import { list } from "./main";
+import { list } from "./CustomerManager";
 
-export const id = document.getElementById("id");
-export const user = document.getElementById("name");
-export const price = document.getElementById("price");
-export const amount = document.getElementById("amount");
-export const customers = document.getElementById("customers");
-export const quota = document.getElementById("quota");
-export const nationality = document.getElementById("nationality");
-export const customerType = document.getElementById("customer-select");
+// Variable
+export const id = <HTMLInputElement>document.getElementById("id");
+export const user = <HTMLInputElement>document.getElementById("name");
+export const price = <HTMLInputElement>document.getElementById("price");
+export const amount = <HTMLInputElement>document.getElementById("amount");
+export const customers = <HTMLInputElement>document.getElementById("customers");
+export const quota = <HTMLInputElement>document.getElementById("quota");
+export const nationality = <HTMLInputElement>(
+  document.getElementById("nationality")
+);
+export const customerType = <HTMLSelectElement>(
+  document.getElementById("customer-select")
+);
 let check: boolean;
 
-export function checkInputs() {
-  const idValue = (<HTMLInputElement>id).value.trim();
-  const userValue = (<HTMLInputElement>user).value.trim();
-  const priceValue = (<HTMLInputElement>price).value.trim();
-  const amountValue = (<HTMLInputElement>amount).value.trim();
-  const customersValue = (<HTMLInputElement>customers).value.trim();
-  const quotaValue = (<HTMLInputElement>quota).value.trim();
-  const nationalityValue = (<HTMLInputElement>nationality).value.trim();
+// Check input
+export function checkInputs(): boolean {
+  const userValue = user.value.trim();
+  const priceValue = price.value.trim();
+  const amountValue = amount.value.trim();
+  const customersValue = customers.value.trim();
+  const quotaValue = quota.value.trim();
+  const nationalityValue = nationality.value.trim();
   check = true;
 
   checkEmpty(user, userValue);
@@ -39,7 +45,8 @@ export function checkInputs() {
   return check;
 }
 
-function setErrorFor(input, message) {
+// Error
+function setErrorFor(input: HTMLInputElement, message: string): void {
   const formControl = input.parentElement;
   const small = formControl.querySelector("small");
 
@@ -47,7 +54,8 @@ function setErrorFor(input, message) {
   small.style.visibility = "visible";
 }
 
-function setSuccessFor(input) {
+// Success
+function setSuccessFor(input: HTMLInputElement): void {
   const formControl = input.parentElement;
   const small = formControl.querySelector("small");
 
@@ -55,7 +63,8 @@ function setSuccessFor(input) {
   small.style.visibility = "hidden";
 }
 
-function checkEmpty(input, value) {
+// Check empty
+function checkEmpty(input: HTMLInputElement, value: string): void {
   if (value == "") {
     setErrorFor(input, `${input.name} cannot be blank`);
     check = false;
@@ -64,7 +73,8 @@ function checkEmpty(input, value) {
   }
 }
 
-function checkNegative(input, value) {
+// Check positive negative
+function checkNegative(input: HTMLInputElement, value: string): void {
   if (parseInt(value) < 0) {
     setErrorFor(input, `${input.name} must be a positive number`);
     check = false;
