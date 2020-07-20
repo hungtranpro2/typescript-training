@@ -1,7 +1,3 @@
-// Import file
-import { CustomersList } from "./CustomersList";
-import { list } from "./CustomerManager";
-
 // Variable
 export const id = <HTMLInputElement>document.getElementById("id");
 export const user = <HTMLInputElement>document.getElementById("name");
@@ -33,50 +29,44 @@ export function checkInputs(): boolean {
   checkEmpty(amount, amountValue);
   checkNegative(amount, amountValue);
 
-  if ((<HTMLSelectElement>customerType).selectedIndex == 0) {
+  if ((<HTMLSelectElement>customerType).selectedIndex === 0) {
     checkEmpty(customers, customersValue);
     checkEmpty(quota, quotaValue);
     checkNegative(quota, quotaValue);
   }
-  if ((<HTMLSelectElement>customerType).selectedIndex == 1) {
+  if ((<HTMLSelectElement>customerType).selectedIndex === 1) {
     checkEmpty(nationality, nationalityValue);
   }
 
   return check;
 }
 
-// Error
-function setErrorFor(input: HTMLInputElement, message: string): void {
+const setSuccessOrErrorFor = (
+  input: HTMLInputElement,
+  message: string,
+  style: string
+) => {
   const formControl = input.parentElement;
   const small = formControl.querySelector("small");
 
   small.innerText = message;
-  small.style.visibility = "visible";
-}
-
-// Success
-function setSuccessFor(input: HTMLInputElement): void {
-  const formControl = input.parentElement;
-  const small = formControl.querySelector("small");
-
-  small.innerText = "";
-  small.style.visibility = "hidden";
-}
+  small.style.visibility = style;
+};
 
 // Check empty
-function checkEmpty(input: HTMLInputElement, value: string): void {
-  if (value == "") {
-    setErrorFor(input, `${input.name} cannot be blank`);
+function checkEmpty(input: HTMLInputElement, value: string) {
+  if (!value) {
+    setSuccessOrErrorFor(input, `${input.name} cannot be blank`,"visible");
     check = false;
   } else {
-    setSuccessFor(input);
+    setSuccessOrErrorFor(input, "","hidden");
   }
 }
 
 // Check positive negative
-function checkNegative(input: HTMLInputElement, value: string): void {
+function checkNegative(input: HTMLInputElement, value: string) {
   if (parseInt(value) < 0) {
-    setErrorFor(input, `${input.name} must be a positive number`);
+    setSuccessOrErrorFor(input, `${input.name} must be a positive number`,"visible");
     check = false;
   }
 }

@@ -1,45 +1,35 @@
 import { Customer } from "./Customer";
+import { domestic } from "./modal";
+type domestic = {
+  id: number;
+  name: string;
+  price: number;
+  amount: number;
+  customers: string;
+  quota: number;
+};
 export class DomesticCustomer extends Customer {
   private _customers: string;
   private _quota: number;
 
-  constructor(
-    id: number,
-    name: string,
-    price: number,
-    amount: number,
-    customer: string,
-    quota: number
-  ) {
-    super(id, name, price, amount);
-    this._customers = customer;
-    this._quota = quota;
+  constructor(customers: domestic) {
+    super(customers.id, customers.name, customers.price, customers.amount);
+    this._customers = customers.customers;
+    this._quota = customers.quota;
   }
 
   public get customers(): string {
     return this._customers;
   }
 
-  public set customers(v: string) {
-    this._customers = v;
-  }
-
   public get quota(): number {
     return this._quota;
   }
 
-  public set quota(v: number) {
-    this._quota = v;
-  }
-
   cash(): number {
-    if (this._quota <= this.amount) {
-      return this.amount * this.price;
-    } else {
-      return (
-        this.amount * this.price * this._quota +
-        (this.amount - this.quota) * this.price * 2.5
-      );
-    }
+    return this._quota <= this.amount
+      ? this.amount * this.price
+      : this.amount * this.price * this._quota +
+          (this.amount - this.quota) * this.price * 2.5;
   }
 }

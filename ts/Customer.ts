@@ -14,32 +14,16 @@ export abstract class Customer {
     return this._id;
   }
 
-  public set id(v: number) {
-    this._id = v;
-  }
-
   public get name(): string {
     return this._name;
-  }
-
-  public set name(v: string) {
-    this._name = v;
   }
 
   public get price(): number {
     return this._price;
   }
 
-  public set price(v: number) {
-    this._price = v;
-  }
-
   public get amount(): number {
     return this._amount;
-  }
-
-  public set amount(v: number) {
-    this._amount = v;
   }
 
   abstract cash(): number;

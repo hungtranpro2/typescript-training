@@ -1,6 +1,6 @@
-import { Customer } from './Customer';
+import { Customer } from "./Customer";
 export class CustomersList {
-  customersList: Customer[] =[];
+  customersList: Customer[] = [];
 
   constructor() {}
 

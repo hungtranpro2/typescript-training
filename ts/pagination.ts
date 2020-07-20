@@ -2,59 +2,60 @@
 import { addCustomerEventListeners } from "./main";
 import { DomesticCustomer } from "./DomesticCustomer";
 import { ForeignCustomer } from "./ForeignCustomer";
-import { tBody } from "./CustomerManager";
+import { tBody, list } from "./CustomerManager";
 import { Customer } from "./Customer";
-import { customers, quota, nationality } from "./validate";
 
 // Variable
-export let current_page = 1;
-export let rows = 5;
+export let currentPage = 1;
+export let rowsPerPage = 5;
+const paginationElement = document.getElementById("pagination");
 
 // Display to table
-export function DisplayList(
+export function displayList(
   items: Customer[],
   wrapper: HTMLElement,
-  rows_per_page: number,
+  rowsPerPage: number,
   page: number
-): void {
+) {
   wrapper.innerHTML = "";
   page--;
 
-  let start = rows_per_page * page;
-  let end = start + rows_per_page;
+  let start = rowsPerPage * page;
+  let end = start + rowsPerPage;
   let paginatedItems = items.slice(start, end);
 
   loadData(paginatedItems);
+  setupPagination(list.customersList, paginationElement, rowsPerPage);
 }
 
 // setup pagination
-export function SetupPagination(
+export function setupPagination(
   items: Customer[],
   wrapper: HTMLElement,
-  rows_per_page: number
+  rowsPerPage: number
 ): void {
   wrapper.innerHTML = "";
 
-  let page_count = Math.ceil(items.length / rows_per_page);
+  let page_count = Math.ceil(items.length / rowsPerPage);
   for (let i = 1; i < page_count + 1; i++) {
-    let btn = PaginationButton(i, items);
+    let btn = paginationButton(i, items);
     wrapper.appendChild(btn);
   }
 }
 
 // Button pagination
-function PaginationButton(page: number, items: Customer[]): HTMLButtonElement {
+function paginationButton(page: number, items: Customer[]): HTMLButtonElement {
   let button = document.createElement("button");
   button.innerText = page.toString();
 
-  if (current_page == page) button.classList.add("active");
+  if (currentPage === page) button.classList.add("active");
 
   button.addEventListener("click", function () {
-    current_page = page;
-    DisplayList(items, tBody, rows, current_page);
+    currentPage = page;
+    displayList(items, tBody, rowsPerPage, currentPage);
 
-    let current_btn = document.querySelector(".page-numbers button.active");
-    current_btn.classList.remove("active");
+    let currentBtn = document.querySelector(".page-numbers button.active");
+    currentBtn.classList.remove("active");
 
     button.classList.add("active");
   });
@@ -63,67 +64,68 @@ function PaginationButton(page: number, items: Customer[]): HTMLButtonElement {
 }
 
 // Load data to table
-function loadData(items: Customer[]): void {
+function loadData(items: Customer[]) {
   let index: number = 0;
   for (let customer of items) {
     if (customer instanceof DomesticCustomer) {
       index++;
-      tBody.innerHTML += addTableRow(
-        customer.id,
-        customer.name,
-        customer.price,
-        customer.amount,
-        customer.customers,
-        customer.quota,
-        "",
-        customer.cash(),
-        index,
-        "Domestic"
-      );
-    } else if (customer instanceof ForeignCustomer) {
+      tBody.innerHTML += addTableRow({
+        id: customer.id,
+        name: customer.name,
+        price: customer.price,
+        amount: customer.amount,
+        customers: customer.customers,
+        quota: customer.quota,
+        nationality: "",
+        cash: customer.cash(),
+        index: index,
+        type: "Domestic",
+      });
+    }
+    if (customer instanceof ForeignCustomer) {
       index++;
-      tBody.innerHTML += addTableRow(
-        customer.id,
-        customer.name,
-        customer.price,
-        customer.amount,
-        "",
-        "",
-        customer.nationality,
-        customer.cash(),
-        index,
-        "Foreign"
-      );
+      tBody.innerHTML += addTableRow({
+        id: customer.id,
+        name: customer.name,
+        price: customer.price,
+        amount: customer.amount,
+        customers: "",
+        quota: "",
+        nationality: customer.nationality,
+        cash: customer.cash(),
+        index: index,
+        type: "Foreign",
+      });
     }
   }
   addCustomerEventListeners();
 }
-
-function addTableRow(
-  id: number,
-  name: string,
-  price: number,
-  amount: number,
-  customers: string,
-  quota: any,
-  nationality: string,
-  cash: number,
-  index: number,
-  type: string
-): string {
+type MenuOptions = {
+  id: number;
+  name: string;
+  price: number;
+  amount: number;
+  customers: string;
+  quota: any;
+  nationality: string;
+  cash: number;
+  index: number;
+  type: string;
+};
+function addTableRow(options: MenuOptions): string {
   return ` <tr>
-  <td>${id}</td>
-  <td>${type}</td>
-  <td>${name}</td>
-  <td>${price}</td>
-  <td>${amount}</td>
-  <td>${customers}</td>
-  <td>${quota}</td>
-  <td>${nationality}</td>
-  <td>${cash}</td>
+  <td>${options.id}</td>
+  <td>${options.type}</td>
+  <td>${options.name}</td>
+  <td>${options.price}</td>
+  <td>${options.amount}</td>
+  <td>${options.customers}</td>
+  <td>${options.quota}</td>
+  <td>${options.nationality}</td>
+  <td>${options.cash}</td>
   <td class = btn-group>
-  <button type="button" class="btn btn--edit" data-id="${index}">Edit</button>
-  <button type="button" class="btn btn--delete" data-id="${index}">Delete</button>
+  <button type="button" class="btn btn--edit" data-id="${options.index}">Edit</button>
+  <button type="button" class="btn btn--delete" data-id="${options.index}">Delete</button>
   </td>
 </tr>`;
 }

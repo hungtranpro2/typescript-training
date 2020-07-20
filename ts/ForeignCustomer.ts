@@ -1,24 +1,22 @@
 import { Customer } from "./Customer";
+import { foreign } from "./modal";
+type foreign = {
+  id: number;
+  name: string;
+  price: number;
+  amount: number;
+  nationality: string;
+};
 export class ForeignCustomer extends Customer {
   private _nationality: string;
 
-  constructor(
-    id: number,
-    name: string,
-    price: number,
-    amount: number,
-    nationality: string
-  ) {
-    super(id, name, price, amount);
-    this._nationality = nationality;
+  constructor(customers: foreign) {
+    super(customers.id, customers.name, customers.price, customers.amount);
+    this._nationality = customers.nationality;
   }
 
   public get nationality(): string {
     return this._nationality;
-  }
-
-  public set nationality(v: string) {
-    this._nationality = v;
   }
 
   cash(): number {

@@ -1,4 +1,5 @@
-export function snackBar(message: string): void {
+const timeShow = 3000;
+export function snackBar(message: string) {
   // Get the snackbar DIV
   var toast = document.getElementById("snackbar");
 
@@ -9,5 +10,5 @@ export function snackBar(message: string): void {
   // After 3 seconds, remove the show class from DIV
   setTimeout(function (): void {
     toast.className = toast.className.replace("show", "");
-  }, 3000);
+  }, timeShow);
 }

@@ -1,17 +1,17 @@
 import { customerType } from "./validate";
-const modal = document.getElementById("myModal");
+export const modal = document.getElementById("myModal");
 export const domestic = document.getElementById("domestic");
 export const foreign = document.getElementById("foreign");
 // Modal box
 export const eventDialog = {
-  showModal: (): void => {
+  showModal: () => {
     modal.style.display = "block";
   },
-  hideModal: (): void => {
+  hideModal: () => {
     modal.style.display = "none";
   },
-  hideModalWindow: (): void => {
-    if (event.target == modal) {
+  hideModalWindow: () => {
+    if (event.target === modal) {
       modal.style.display = "none";
     }
   },
@@ -30,12 +30,15 @@ for (const x in type) {
 }
 
 // Selected Customer
-export function selectCustomer(): void {
-  if ((<HTMLSelectElement>customerType).selectedIndex == 0) {
-    domestic.style.display = "flex";
-    foreign.style.display = "none";
+export function selectCustomer() {
+  if ((<HTMLSelectElement>customerType).selectedIndex === 0) {
+    displaySelected("flex", "none");
   } else {
-    domestic.style.display = "none";
-    foreign.style.display = "flex";
+    displaySelected("none", "flex");
   }
 }
+
+export const displaySelected = (domes: string, fore: string) => {
+  domestic.style.display = domes;
+  foreign.style.display = fore;
+};
